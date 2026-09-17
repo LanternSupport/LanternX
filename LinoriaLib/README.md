@@ -1,7 +1,7 @@
-# LinoriaLib
+# LanternX UI Library
 A Roblox UI library inspired by Splix, BBot and many others.
 
-Used in the Linoria script hub: https://kyaru.cloud
+Used in the LanternX script hub.
 
 ###### Example Script: 
 * [Example](Example.lua)
