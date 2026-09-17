@@ -3,9 +3,9 @@
 
 local repo = 'https://raw.githubusercontent.com/LanternSupport/LanternX/main/LinoriaLib/'
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua?v=' .. tick()))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua?v=' .. tick()))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua?v=' .. tick()))()
 
 local Window = Library:CreateWindow({
     -- Set Center to true if you want the menu to appear in the center
