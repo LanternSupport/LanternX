@@ -3512,57 +3512,57 @@ function Library:CreateWindow(...)
             return;
         end;
 
-        local FadeTime = Config.MenuFadeTime;
+        local FadeTime = Config.MenuFadeTime or 0.2;
         Fading = true;
         Toggled = (not Toggled);
         ModalElement.Modal = Toggled;
 
         if Toggled then
-            -- A bit scuffed, but if we're going from not toggled -> toggled we want to show the frame immediately so that the fade is visible.
             Outer.Visible = true;
-
-            -- Cursor logic removed per user request
         end;
 
-        for _, Desc in next, Outer:GetDescendants() do
-            local Properties = {};
+        task.spawn(function()
+            for _, Desc in next, Outer:GetDescendants() do
+                local Properties = {};
 
-            if Desc:IsA('ImageLabel') then
-                table.insert(Properties, 'ImageTransparency');
-                table.insert(Properties, 'BackgroundTransparency');
-            elseif Desc:IsA('TextLabel') or Desc:IsA('TextBox') then
-                table.insert(Properties, 'TextTransparency');
-            elseif Desc:IsA('Frame') or Desc:IsA('ScrollingFrame') then
-                table.insert(Properties, 'BackgroundTransparency');
-            elseif Desc:IsA('UIStroke') then
-                table.insert(Properties, 'Transparency');
-            end;
-
-            local Cache = TransparencyCache[Desc];
-
-            if (not Cache) then
-                Cache = {};
-                TransparencyCache[Desc] = Cache;
-            end;
-
-            for _, Prop in next, Properties do
-                if not Cache[Prop] then
-                    Cache[Prop] = Desc[Prop];
+                if Desc:IsA('ImageLabel') then
+                    table.insert(Properties, 'ImageTransparency');
+                    table.insert(Properties, 'BackgroundTransparency');
+                elseif Desc:IsA('TextLabel') or Desc:IsA('TextBox') then
+                    table.insert(Properties, 'TextTransparency');
+                elseif Desc:IsA('Frame') or Desc:IsA('ScrollingFrame') then
+                    table.insert(Properties, 'BackgroundTransparency');
+                elseif Desc:IsA('UIStroke') then
+                    table.insert(Properties, 'Transparency');
                 end;
 
-                if Cache[Prop] == 1 then
-                    continue;
+                local Cache = TransparencyCache[Desc];
+
+                if (not Cache) then
+                    Cache = {};
+                    TransparencyCache[Desc] = Cache;
                 end;
 
-                TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { [Prop] = Toggled and Cache[Prop] or 1 }):Play();
+                for _, Prop in next, Properties do
+                    if not Cache[Prop] then
+                        Cache[Prop] = Desc[Prop];
+                    end;
+
+                    if Cache[Prop] == 1 then
+                        continue;
+                    end;
+
+                    pcall(function()
+                        TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { [Prop] = Toggled and Cache[Prop] or 1 }):Play();
+                    end)
+                end;
             end;
-        end;
 
-        task.wait(FadeTime);
+            task.wait(FadeTime);
 
-        Outer.Visible = Toggled;
-
-        Fading = false;
+            Outer.Visible = Toggled;
+            Fading = false;
+        end)
     end
 
     Library:GiveSignal(InputService.InputBegan:Connect(function(Input, Processed)
