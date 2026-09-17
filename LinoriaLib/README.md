@@ -1,7 +1,13 @@
+> [!IMPORTANT]  
+> This is a (somewhat) maintained fork of LinoriaLib. This is not the original LinoriaLib repository.<br />
+> Changelogs: [Changelogs](CHANGELOG.md)<br />
+> The repo might get archived at some point since I'm more focused on the [Obsidian](https://github.com/deividcomsono/Obsidian) UI Library now.
+
 # LanternX UI Library
 A Roblox UI library inspired by Splix, BBot and many others.
 
-Used in the LanternX script hub.
+###### Original repository
+* [violin-suzutsuki/LinoriaLib](https://github.com/violin-suzutsuki/LinoriaLib)
 
 ###### Example Script: 
 * [Example](Example.lua)
@@ -21,5 +27,7 @@ Used in the LanternX script hub.
 ## Contributors
 - Inori: Main developer.
 - Wally: Cleaning up verbose code, extending library functionality.
+- mstudio45: Extending library functionality and adding resizing to the menu.
 - Stefanuk: Extending library functionality.
 - matas3535: Creator of Splix.
+- RectangularObject: Fixing UI bugs, extending library functionality.
