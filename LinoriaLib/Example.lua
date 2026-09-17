@@ -3,9 +3,9 @@
 
 local repo = 'https://raw.githubusercontent.com/LanternSupport/LanternX/main/LinoriaLib/'
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua?v=' .. tick()))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua?v=' .. tick()))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua?v=' .. tick()))()
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
     -- Set Center to true if you want the menu to appear in the center
@@ -441,8 +441,8 @@ SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
 -- use case for doing it this way:
 -- a script hub could have themes in a global folder
 -- and game configs in a separate folder per game
-ThemeManager:SetFolder('LanternX')
-SaveManager:SetFolder('LanternX/main')
+ThemeManager:SetFolder('MyScriptHub')
+SaveManager:SetFolder('MyScriptHub/specific-game')
 
 -- Builds our config menu on the right side of our tab
 SaveManager:BuildConfigSection(Tabs['UI Settings'])
